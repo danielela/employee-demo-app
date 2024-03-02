@@ -1,12 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 const ListEmployeeComponent = () => {
+
+    const navigate = useNavigate();
 
     const [employees, setEmployees] = useState([]);
 
     useEffect(() => {
+        
         axios
         .get("http://localhost:8080/api/v1/employees")
         .then((response) => {
@@ -17,24 +20,14 @@ const ListEmployeeComponent = () => {
         });
       }, []);
 
-    // const employees = [
-    //     {
-    //         "id" : 1,
-    //         "firstName" : "John",
-    //         "lastName" : "Doe",
-    //         "emailId" : "john@email.com"
-    //     },
-    //     {
-    //         "id" : 2,
-    //         "firstName" : "Alex",
-    //         "lastName" : "Smith",
-    //         "emailId" : "alex@email.com"
-    //     }
-    // ];
+      function buttonClickHandler(){
+        navigate("/createEmployee");
+      }
 
     return(
-        <div>  
+        <div className="container bg-white text-dark" >  
             <h1>Employee List</h1>
+            <button className="btn btn-primary" onClick={buttonClickHandler} name="Create Employee" > Create Employee</button>
             <table className="table table-striped">
                 <thead>
                     <tr>
